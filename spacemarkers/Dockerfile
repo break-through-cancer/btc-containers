@@ -1,6 +1,6 @@
 FROM rocker/tidyverse:4
 
-RUN git clone https://github.com/atuldeshpande/SpaceMarkers.git spacemarkers
+RUN git clone https://github.com/DeshpandeLab/SpaceMarkers.git spacemarkers
 WORKDIR /spacemarkers
 
 RUN sudo apt-get update -y && \

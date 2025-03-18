@@ -18,7 +18,6 @@ jobs:
     strategy:
       matrix:
         image_name:
-          - spacemarkers
           - squidpy
           - rctd
     runs-on: ubuntu-latest

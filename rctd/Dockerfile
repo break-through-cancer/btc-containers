@@ -10,5 +10,7 @@ RUN python3 -m venv venv && \
     pip install --upgrade pip && \
     pip install anndata
 
+ENV PATH="/app/venv/bin:$PATH"
+
 RUN Rscript -e 'install.packages("reticulate", repos = "https://cloud.r-project.org")'
 RUN Rscript -e 'devtools::install_github("dmcable/spacexr", dependencies = TRUE)'

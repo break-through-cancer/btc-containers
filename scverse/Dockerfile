@@ -9,5 +9,6 @@ RUN pip install anndata \
                 scvi-tools \
                 scirpy \
                 squidpy \
+                spatialdata_io \
                 seaborn \
                 pandas

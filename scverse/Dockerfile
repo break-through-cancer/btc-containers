@@ -11,4 +11,5 @@ RUN pip install anndata \
                 squidpy \
                 spatialdata_io \
                 seaborn \
-                pandas
+                pandas \
+                boto3

@@ -12,4 +12,6 @@ RUN pip install anndata \
                 spatialdata_io \
                 seaborn \
                 pandas \
-                boto3
+                boto3 \
+//cure ligrec p-value NaN 
+RUN pip install git+https://github.com/scverse/squidpy@349b75afbd26a9a5b832b9243bcd3fdf79cf0ea6           

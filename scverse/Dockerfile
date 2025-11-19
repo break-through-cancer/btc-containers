@@ -14,5 +14,5 @@ RUN pip install anndata \
                 pandas \
                 boto3
                 
-#cure ligrec p-value NaN 
-RUN pip install git+https://github.com/scverse/squidpy@349b75afbd26a9a5b832b9243bcd3fdf79cf0ea6           
+#grab new co-occurrence version
+RUN pip install git+https://github.com/scverse/squidpy@32789aefd53b797ceee8c3153beded2f46a2cd4c           

@@ -8,7 +8,8 @@ RUN pip install anndata \
                 spatialdata_io \
                 seaborn \
                 pandas \
-                boto3
+                boto3 \
+                pydeseq2
                 
 #grab new co-occurrence version
 RUN pip install git+https://github.com/scverse/squidpy@32789aefd53b797ceee8c3153beded2f46a2cd4c           

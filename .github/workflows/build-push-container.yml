@@ -29,36 +29,34 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Detect changed containers
-        id: changes
-        uses: dorny/paths-filter@v3
         with:
-          filters: |
-            squidpy:
-              - 'squidpy/**'
-            rctd:
-              - 'rctd/**'
-            scverse:
-              - 'scverse/**'
+          fetch-depth: 0
 
-      - name: Build matrix from changed containers
+      - name: Detect changed containers and build matrix
         id: set-matrix
         env:
           EVENT_NAME: ${{ github.event_name }}
-          SQUIDPY_CHANGED: ${{ steps.changes.outputs.squidpy }}
-          RCTD_CHANGED: ${{ steps.changes.outputs.rctd }}
-          SCVERSE_CHANGED: ${{ steps.changes.outputs.scverse }}
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
 
+          known_images=("squidpy" "rctd" "scverse")
           changed_images=()
+          ZERO_SHA="0000000000000000000000000000000000000000"
+
           if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
-            changed_images=("squidpy" "rctd" "scverse")
+            changed_images=("${known_images[@]}")
+          elif [ -z "$BEFORE_SHA" ] || [ "$BEFORE_SHA" = "$ZERO_SHA" ]; then
+            # First push to the branch – no previous commit to diff against; build everything
+            changed_images=("${known_images[@]}")
           else
-            [ "$SQUIDPY_CHANGED" = "true" ] && changed_images+=("squidpy")
-            [ "$RCTD_CHANGED" = "true" ] && changed_images+=("rctd")
-            [ "$SCVERSE_CHANGED" = "true" ] && changed_images+=("scverse")
+            changed_dirs=$(git diff --name-only "$BEFORE_SHA" "$AFTER_SHA" | cut -d/ -f1 | sort -u)
+            for image in "${known_images[@]}"; do
+              if echo "$changed_dirs" | grep -qx "$image"; then
+                changed_images+=("$image")
+              fi
+            done
           fi
 
           if [ "${#changed_images[@]}" -eq 0 ]; then

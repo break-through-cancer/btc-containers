@@ -4,7 +4,8 @@ RUN pip install --upgrade pip
 
 #avoid pyarrow EOF error in xenium
 RUN pip install pyarrow==21 \
-                scipy==1.12
+                scipy==1.12 \
+                spatialdata==0.5.1
 
 RUN pip install anndata \
                 spatialdata \

@@ -2,8 +2,10 @@ FROM python:3.11
 
 RUN pip install --upgrade pip
 
+#avoid pyarrow EOF error in xenium
 RUN pip install pyarrow==21 \
                 scipy==1.12
+
 RUN pip install anndata \
                 spatialdata \
                 scanpy \

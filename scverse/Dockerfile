@@ -1,10 +1,12 @@
 FROM python:3.11
 
 RUN pip install --upgrade pip
+
+RUN pip install pyarrow==21 \
+                scipy==1.12
 RUN pip install anndata \
                 spatialdata \
                 scanpy \
-                squidpy \
                 spatialdata_io \
                 seaborn \
                 pandas \

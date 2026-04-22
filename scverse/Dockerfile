@@ -6,6 +6,7 @@ RUN pip install anndata \
                 spatialdata \
                 scanpy \
                 spatialdata_io \
+                squidpy \
                 seaborn \
                 pandas \
                 boto3 \
